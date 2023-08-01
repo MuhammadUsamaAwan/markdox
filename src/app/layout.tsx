@@ -5,8 +5,6 @@ import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import { fontHeading, fontSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
-import { MainNav } from '@/components/layouts/main-nav';
-import { SiteFooter } from '@/components/layouts/site-footer';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
@@ -17,14 +15,16 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable, fontHeading.variable)}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <MainNav items={siteConfig.nav} />
-          <main>{children}</main>
-          <SiteFooter />
+          {children}
         </ThemeProvider>
       </body>
     </html>
