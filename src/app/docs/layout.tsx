@@ -1,5 +1,6 @@
 import { docsConfig } from '@/config/docs';
 import { siteConfig } from '@/config/site';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { MainNav } from '@/components/layouts/main-nav';
 import { DocsSidebarNav } from '@/components/layouts/sidebar-nav';
 import { SiteFooter } from '@/components/layouts/site-footer';
@@ -18,7 +19,14 @@ export default function DocsLayout({ children }: DocsLayoutProps) {
           </MainNav>
         </div>
       </header>
-      <div className='container flex-1'>{children}</div>
+      <div className='container flex-1'>
+        <div className='flex-1 md:grid md:grid-cols-[220px_1fr] md:gap-6 lg:grid-cols-[240px_1fr] lg:gap-10'>
+          <ScrollArea className='fixed top-0 z-30 hidden h-[calc(100vh-3.5rem)] w-full py-6 pr-2 md:sticky md:block lg:py-10'>
+            <DocsSidebarNav items={docsConfig.sidebarNav} />
+          </ScrollArea>
+          {children}
+        </div>
+      </div>
       <SiteFooter />
     </div>
   );
